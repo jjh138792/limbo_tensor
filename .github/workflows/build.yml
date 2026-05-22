@@ -16,7 +16,7 @@ jobs:
       - name: Inject Golden Gradle Engine (7.4.2)
         uses: gradle/actions/setup-gradle@v3
         with:
-          # 强行抛弃系统的 9.5.1，下载并注入最适合老安卓工程的 7.4.2 版本！!
+          # 强行抛弃系统的 9.5.1，下载并注入最适合老安卓工程的 7.4.2 版本！!！
           gradle-version: '7.4.2'
 
       - name: Smart Build APK
