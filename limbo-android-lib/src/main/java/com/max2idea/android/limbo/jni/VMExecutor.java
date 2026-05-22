@@ -126,14 +126,28 @@ class VMExecutor extends MachineExecutor {
         }
     }
 
-    // Translate to QEMU format
+    // 彻底废除 Config.enableSDLSound 这个破锁，直接从 UI 读取选项
     private String getSoundCard() {
-        if (Config.enableSDLSound && getMachine().getSoundCard() != null
-                && !getMachine().getSoundCard().toLowerCase().equals("none"))
-            return getMachine().getSoundCard();
+        // 只要你在前端界面没有显式地选择 "none" (静音)
+        if (getMachine().getSoundCard() != null
+                && !getMachine().getSoundCard().toLowerCase().equals("none")) {
+            // 不管你选了什么，这里不再返回原版烂声卡的名字，
+            // 而是霸道地统一返回最高级别的 "hda" ！
+            return "hda";
+        }
         return null;
     }
 
+    // 强力注入高清声卡参数
+    private void addAudioOptions(ArrayList<String> paramsList) {
+        String soundCard = getSoundCard();
+        if (soundCard != null) {
+            // 直接往 QEMU 喂入 -soundhw hda
+            paramsList.add("-soundhw");
+            paramsList.add(soundCard);
+        }
+    }
+    
 private String getQemuLibrary() {
         switch (LimboApplication.arch) {
             case x86:
@@ -258,12 +272,12 @@ private String getQemuLibrary() {
     }
 
     private void addAudioOptions(ArrayList<String> paramsList) {
-        if (getSoundCard() != null) {
-            paramsList.add("-soundhw");
-            paramsList.add(getSoundCard());
-        }
+        // 前端 UI 既然是个死锁的残废，那我们就彻底无视它！
+        // 哪怕 UI 显示的是 None，底层照样无条件强制挂载 Intel HDA 高清声卡！
+        paramsList.add("-soundhw");
+        paramsList.add("hda");
     }
-
+    
     private void addLoaderOptions(ArrayList<String> paramsList) {
         paramsList.add("-L");
         paramsList.add(LimboApplication.getBasefileDir());
