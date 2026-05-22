@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="orientationLabels">
+        <item>自动感应传感器 (Auto)</item>
+        <item>强制横屏锁定 (Landscape)</item>
+        <item>反向横屏锁定 (Landscape Reverse)</item>
+        <item>强制竖屏锁定 (Portrait)</item>
+        <item>反向竖屏锁定 (Portrait Reverse)</item>
+    </string-array>
+    <string-array name="orientationValues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="diskCacheLabels">
+        <item>默认调度 (Default)</item>
+        <item>无缓存强直通 (None)</item>
+        <item>透写模式 (Write-through)</item>
+        <item>回写模式/性能最优 (Write-back)</item>
+        <item>强制同步写入 (Direct-sync)</item>
+        <item>激进缓存/易丢数据 (Unsafe)</item>
+    </string-array>
+    <string-array name="diskCacheValues">
+        <item>default</item>
+        <item>none</item>
+        <item>writethrough</item>
+        <item>writeback</item>
+        <item>directsync</item>
+        <item>unsafe</item>
+    </string-array>
+
     <string-array name="keyMapperLabels">
         <item>@string/threeBySix</item>
         <item>@string/fourByEight</item>
@@ -12,15 +44,15 @@
     </string-array>
 
     <string-array name="keyPressDelayLabels">
-        <item>20 ms</item>
-        <item>30 ms</item>
-        <item>40 ms</item>
-        <item>50 ms</item>
-        <item>60 ms</item>
-        <item>70 ms</item>
-        <item>80 ms</item>
-        <item>90 ms</item>
-        <item>100 ms</item>
+        <item>20 毫秒 (极速)</item>
+        <item>30 毫秒</item>
+        <item>40 毫秒</item>
+        <item>50 毫秒 (默认)</item>
+        <item>60 毫秒</item>
+        <item>70 毫秒</item>
+        <item>80 毫秒</item>
+        <item>90 毫秒</item>
+        <item>100 毫秒 (高延迟抗丢键)</item>
     </string-array>
     <string-array name="keyPressDelayValues">
         <item>20</item>
@@ -35,15 +67,15 @@
     </string-array>
 
     <string-array name="mouseButtonDelayLabels">
-        <item>20 ms</item>
-        <item>30 ms</item>
-        <item>40 ms</item>
-        <item>50 ms</item>
-        <item>60 ms</item>
-        <item>70 ms</item>
-        <item>80 ms</item>
-        <item>90 ms</item>
-        <item>100 ms</item>
+        <item>20 毫秒 (极速)</item>
+        <item>30 毫秒</item>
+        <item>40 毫秒</item>
+        <item>50 毫秒 (默认)</item>
+        <item>60 毫秒</item>
+        <item>70 毫秒</item>
+        <item>80 毫秒</item>
+        <item>90 毫秒</item>
+        <item>100 毫秒 (防双击误触)</item>
     </string-array>
     <string-array name="mouseButtonDelayValues">
         <item>20</item>
@@ -55,37 +87,5 @@
         <item>80</item>
         <item>90</item>
         <item>100</item>
-    </string-array>
-
-    <string-array name="orientationLabels">
-        <item>@string/Auto</item>
-        <item>@string/Landscape</item>
-        <item>@string/LandscapeReverse</item>
-        <item>@string/Portrait</item>
-        <item>@string/PortraitReverse</item>
-    </string-array>
-    <string-array name="orientationValues">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-    </string-array>
-
-    <string-array name="diskCacheLabels">
-        <item>default</item>
-        <item>none</item>
-        <item>writethrough</item>
-        <item>writeback</item>
-        <item>directsync</item>
-        <item>unsafe</item>
-    </string-array>
-    <string-array name="diskCacheValues">
-        <item>default</item>
-        <item>none</item>
-        <item>writethrough</item>
-        <item>writeback</item>
-        <item>directsync</item>
-        <item>unsafe</item>
     </string-array>
 </resources>
