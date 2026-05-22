@@ -13,22 +13,25 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      - name: Build APK with Global Gradle
+      - name: Inject Golden Gradle Engine (7.4.2)
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          # 强行抛弃系统的 9.5.1，下载并注入最适合老安卓工程的 7.4.2 版本！
+          gradle-version: '7.4.2'
+
+      - name: Smart Build APK
         run: |
-          # 彻底抛弃对 gradlew 的幻想！全图雷达直接搜索安卓工程的命脉：build.gradle
+          # 雷达扫描定位真实根目录
           PROJECT_DIR=$(dirname $(find . -name "build.gradle" | head -n 1))
           echo "雷达锁定安卓工程根目录: $PROJECT_DIR"
-          
-          # 直接切入真实的工程目录，防止你上传时带了外层文件夹导致路径错位
           cd "$PROJECT_DIR"
           
-          # 无视原作者的配置，强行拉起 GitHub 服务器自带的全局 Gradle 引擎点火编译！
+          # 此时的 gradle 命令已经被偷梁换柱，变成了我们刚才注入的 7.4.2！
           gradle assembleDebug
 
       - name: Auto-Capture APK
         uses: actions/upload-artifact@v4
         with:
           name: Limbo-JJH-Edition
-          # 全图抓取战利品，不管 APK 被编译到了哪个深层目录，直接提取出来！
           path: '**/*.apk'
           
