@@ -178,9 +178,8 @@ private String getQemuLibrary() {
         addNetworkOptions(paramsList);
         addUSBOptions(paramsList);
 
-        //addGenericOptions(context, paramsList);
-        //addStateOptions(paramsList);
-        //addAdvancedOptions(paramsList);
+        addGenericOptions(context, paramsList);
+        addAdvancedOptions(paramsList);
 
         return paramsList.toArray(new String[0]);
     }
@@ -422,34 +421,32 @@ private String getQemuLibrary() {
     private void addUSBOptions(ArrayList<String> paramsList) throws Exception {
         if (getMachine().getEnableUSB1() != 0) {
             String usbPath = getMachine().getUSB1path();
-            String bus = usbPath.split("\\.")[0];
-            String addr = usbPath.split("\\.")[1];
-            //-device usb-host,hostbus=3,hostaddr=4
-            String USBout = "-device usb-host,hostbus=" + bus + ",hostaddr=" + addr;
+            // 将前端 UI 传过来的 "174c.55aa" 用句号拆解
+            String vendor = usbPath.split("\\.")[0];
+            String product = usbPath.split("\\.")[1];
+            // 彻底抛弃原版的 hostbus 逻辑，拼接为强制锁死硬件 ID 的 QEMU 指令
+            String USBout = "-device usb-host,vendorid=0x" + vendor + ",productid=0x" + product;
             paramsList.add(USBout);
         }
         if (getMachine().getEnableUSB2() != 0) {
             String usbPath = getMachine().getUSB2path();
-            String bus = usbPath.split("\\.")[0];
-            String addr = usbPath.split("\\.")[1];
-            //-device usb-host,hostbus=3,hostaddr=4
-            String USBout = "-device usb-host,hostbus=" + bus + ",hostaddr=" + addr;
+            String vendor = usbPath.split("\\.")[0];
+            String product = usbPath.split("\\.")[1];
+            String USBout = "-device usb-host,vendorid=0x" + vendor + ",productid=0x" + product;
             paramsList.add(USBout);
         }
         if (getMachine().getEnableUSB3() != 0) {
             String usbPath = getMachine().getUSB3path();
-            String bus = usbPath.split("\\.")[0];
-            String addr = usbPath.split("\\.")[1];
-            //-device usb-host,hostbus=3,hostaddr=4
-            String USBout = "-device usb-host,hostbus=" + bus + ",hostaddr=" + addr;
+            String vendor = usbPath.split("\\.")[0];
+            String product = usbPath.split("\\.")[1];
+            String USBout = "-device usb-host,vendorid=0x" + vendor + ",productid=0x" + product;
             paramsList.add(USBout);
         }
         if (getMachine().getEnableUSB4() != 0) {
             String usbPath = getMachine().getUSB4path();
-            String bus = usbPath.split("\\.")[0];
-            String addr = usbPath.split("\\.")[1];
-            //-device usb-host,hostbus=3,hostaddr=4
-            String USBout = "-device usb-host,hostbus=" + bus + ",hostaddr=" + addr;
+            String vendor = usbPath.split("\\.")[0];
+            String product = usbPath.split("\\.")[1];
+            String USBout = "-device usb-host,vendorid=0x" + vendor + ",productid=0x" + product;
             paramsList.add(USBout);
         }
     }
